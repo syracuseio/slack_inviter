@@ -20,7 +20,13 @@ defmodule SlackInviterWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", SlackInviterWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", SlackInviterWeb do
+    pipe_through :api
+
+    # / desrcibes what this is
+    # /api/:slackname/info
+    # /api/:slackname/register
+    get "/:slackname", SlackController, :show
+    post "/:slackname/register", SlackController, :create
+  end
 end
