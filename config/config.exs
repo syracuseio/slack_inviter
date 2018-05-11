@@ -5,10 +5,6 @@
 # is restricted to this project.
 use Mix.Config
 
-# General application configuration
-config :slack_inviter,
-  ecto_repos: [SlackInviter.Repo]
-
 # Configures the endpoint
 config :slack_inviter, SlackInviterWeb.Endpoint,
   url: [host: "localhost"],
