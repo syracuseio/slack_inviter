@@ -1,1 +1,16 @@
 /* This file is for your main application css. */
+
+body {
+    font-size: 20px;
+}
+
+.navbar-custom {
+    background-color: #1B1B1B;
+    border-bottom: 2px solid #474747;
+}
+.navbar-custom .navbar-brand, .navbar-custom .nav li a {
+    font-weight: 700;
+    color: #F0F0F0;
+}
+
+

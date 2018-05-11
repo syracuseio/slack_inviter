@@ -7,29 +7,48 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello SlackInviter!</title>
+    <title>Syracuse.io Slack!</title>
+    <link rel="stylesheet" href="https://syracuse.io/css/main.css">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
+    <nav class="navbar navbar-fixed-top navbar-custom">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://syracuse.io/">Syracuse.io</a>
+        </div>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <div class="collapse navbar-collapse" id="main-navbar"> </div>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+        <div class="avatar-container">
+          <div class="avatar-img-border">
 
-    </div> <!-- /container -->
+              <a title="Syracuse.io" href="https://syracuse.io/">
+                <img class="avatar-img" src="https://syracuse.io/img/logo.png" alt="Syracuse.io">
+              </a>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+    <div style="margin-top: 150px;" role="main" class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+          <%= render @view_module, @view_template, assigns %>
+        </div>
+      </div>
+    </div>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

@@ -17,16 +17,23 @@ defmodule SlackInviterWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    scope "/invite" do
+      pipe_through :browser
+
+      get "/", InviteController, :index
+      post "/", InviteController, :create
+    end
   end
 
-  # Other scopes may use custom stacks.
-  scope "/api", SlackInviterWeb do
-    pipe_through :api
-
-    # / desrcibes what this is
-    # /api/:slackname/info
-    # /api/:slackname/register
-    get "/:slackname", SlackController, :show
-    post "/:slackname/register", SlackController, :create
-  end
+  # # Other scopes may use custom stacks.
+  # scope "/api", SlackInviterWeb do
+  #   pipe_through :api
+  #
+  #   # / desrcibes what this is
+  #   # /api/:slackname/info
+  #   # /api/:slackname/register
+  #   get "/:slackname", SlackController, :show
+  #   post "/:slackname/register", SlackController, :create
+  # end
 end
