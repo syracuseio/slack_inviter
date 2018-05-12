@@ -3,13 +3,14 @@ defmodule SlackInviterWeb.PageController do
   require Logger
 
   def index(conn, _params) do
-    case SlackInviter.Users.list do
+    users = case SlackInviter.Users.list do
       {:ok, user_counts} ->
-        render conn, "index.html", members: user_counts
+        user_counts
       {:error, reason} ->
         Logger.warn "Slack member retrieval failure: #{reason}."
+        %{}
     end
 
-    render conn, "index.html", members: %{}
+    render conn, "index.html", members: users
   end
 end
