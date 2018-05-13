@@ -30,16 +30,15 @@ defmodule SlackInviter.Users do
                         member["presence"]
                       end)
 
-        if is_nil(partitioned) do
-          Logger.debug(inspect(response)) #seeing 500s in the logs, not sure what's going on
-        end
-
-        results = %{ active: Enum.count(partitioned["active"]),
-             away: Enum.count(partitioned["away"]) }
+        results = %{ active: active_user_count(partitioned),
+                     away:   Enum.count(partitioned["away"]) }
         {:ok, results}
       %{"ok" => false} ->
         Logger.warn "Fail "<> response["error"]
         {:error, response["error"]}
     end
   end
+
+  defp active_user_count(%{"active" => active}) when is_nil(active), do: 0
+  defp active_user_count(%{"active" => active}), do: Enum.count(active)
 end
