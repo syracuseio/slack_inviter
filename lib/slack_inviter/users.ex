@@ -29,6 +29,8 @@ defmodule SlackInviter.Users do
                       |> Enum.group_by(fn(member) ->
                         member["presence"]
                       end)
+        Logger.info(inspect(Map.keys(partitioned)))
+        #Logger.info(inspect(partitioned))
 
         results = %{ active: active_user_count(partitioned),
                      away:   Enum.count(partitioned["away"]) }
