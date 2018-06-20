@@ -7,7 +7,7 @@ defmodule SlackInviterWeb.PageController do
       {:ok, user_counts} ->
         user_counts
       {:error, reason} ->
-        Logger.warn "Slack member retrieval failure: #{reason}."
+        Logger.info "Slack member retrieval failure: #{reason}."
         %{}
     end
 

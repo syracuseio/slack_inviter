@@ -13,6 +13,10 @@ config :slack_inviter, SlackInviterWeb.Endpoint,
   pubsub: [name: SlackInviter.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :slack_inviter,
+  slack_api_base_url: System.get_env("SLACK_API_BASE") || "https://slack.com/api",
+  slack_api_token: System.get_env("SLACK_API_TOKEN")
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
@@ -22,3 +26,4 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
