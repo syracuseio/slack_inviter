@@ -6,8 +6,8 @@ defmodule SlackInviter.UsersTest do
   describe "Users.list" do
     test "parses users into active and away" do
       response = %{"ok" => true, "members" => [
-            %{ real_name: "Aleksandra", presence: "active"},
-            %{ real_name: "Aleksandra", presence: "away"},
+            %{ "real_name" => "Aleksandra", "presence" => "active"},
+            %{ "real_name" => "Aleksandra", "presence" => "away"},
           ]}
       case Users.parse_list(response) do
         {:ok, res} ->
@@ -20,8 +20,8 @@ defmodule SlackInviter.UsersTest do
   describe "when there are note active users" do
     test "it returns 0 active users" do
       response = %{"ok" => true, "members" => [
-            %{ real_name: "Aleksandra", presence: "away"},
-            %{ real_name: "Aleksandra", presence: "away"},
+            %{ "real_name" => "Aleksandra", "presence" => "away"},
+            %{ "real_name" => "Aleksandra", "presence" => "away"},
           ]}
       case Users.parse_list(response) do
         {:ok, res} ->

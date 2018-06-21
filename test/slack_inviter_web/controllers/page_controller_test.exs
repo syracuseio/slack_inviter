@@ -5,11 +5,11 @@ defmodule SlackInviterWeb.PageControllerTest do
   @slack_api_base_url Application.get_env(:slack_inviter, :slack_api_base_url)
 
   setup do
-    mock fn
+    Tesla.Mock.mock fn
       %{method: :post, url: @slack_api_base_url <> "/users.list"} ->
         {201, %{}, %{"ok" => true, "members" => [
-          %{ real_name: "Aleksandra", presence: "away"},
-          %{ real_name: "Aleksandra", presence: "active"},
+          %{ "real_name" => "Aleksandra", "presence" => "away"},
+          %{ "real_name" => "Aleksandra", "presence" => "active"},
         ]}}
     end
 

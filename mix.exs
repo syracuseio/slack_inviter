@@ -19,7 +19,7 @@ defmodule SlackInviter.Mixfile do
   def application do
     [
       mod: {SlackInviter.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :jason]
     ]
   end
 
@@ -38,7 +38,8 @@ defmodule SlackInviter.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:tesla, "~> 0.10.0"},
+      {:tesla, "~> 1.0.0"},
+      {:jason, "~> 1.0"},
     ]
   end
 

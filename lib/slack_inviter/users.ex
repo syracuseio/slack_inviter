@@ -2,7 +2,7 @@ defmodule SlackInviter.Users do
   require Logger
 
   def invite(email) do
-    %{body: response} = SlackInviter.SlackApi.invite_user(email)
+    {:ok, %{body: response}} = SlackInviter.SlackApi.invite_user(email)
     parse_invite email, response
   end
 
@@ -18,7 +18,7 @@ defmodule SlackInviter.Users do
 
 
   def list do
-    %{body: response} = SlackInviter.SlackApi.list_users
+    {:ok, %{body: response}} = SlackInviter.SlackApi.list_users
     parse_list response
   end
 
@@ -34,7 +34,7 @@ defmodule SlackInviter.Users do
         partitioned = response
                       |> Map.get("members")
                       |> Enum.group_by(fn(member) ->
-                        member[:presence]
+                        member["presence"]
                       end)
         results = %{ active: active_user_count(partitioned),
                      away:   Enum.count(partitioned["away"]) }

@@ -8,11 +8,11 @@ defmodule SlackInviter.SlackApiTest do
 
   describe "SlackApi.list_users" do
     setup do
-      mock fn
+      Tesla.Mock.mock fn
         %{method: :post, url: @slack_api_base_url <> "/users.list"} ->
           {201, %{}, %{"ok" => true, "members" => [
-                                        %{ real_name: "Aleksandra", presence: "away"},
-                                        %{ real_name: "Aleksandra", presence: "active"},
+                                        %{ "real_name" => "Aleksandra", "presence" => "away"},
+                                        %{ "real_name" => "Aleksandra", "presence" => "active"},
                                       ]}}
       end
 
@@ -21,8 +21,7 @@ defmodule SlackInviter.SlackApiTest do
 
     test "returns a list of slack members" do
       case SlackApi.list_users do
-        %{body: res} ->
-
+        {:ok, %{body: res} } ->
           assert res["ok"] == true
           assert Enum.count(res["members"]) == 2
         {:error, err} -> flunk err
@@ -33,7 +32,7 @@ defmodule SlackInviter.SlackApiTest do
 
   describe "SlackApi.invite_user" do
     setup do
-      mock fn
+      Tesla.Mock.mock fn
         %{method: :post, url: @slack_api_base_url <> "/users.admin.invite", body: "email=newbie%40syracuse.io&resend=true&token="} ->
           {200, %{}, %{"ok" => true}}
         %{method: :post, url: @slack_api_base_url <> "/users.admin.invite", body: "email=member%40syracuse.io&resend=true&token="} ->
@@ -47,7 +46,7 @@ defmodule SlackInviter.SlackApiTest do
         email = "newbie@syracuse.io"
 
         case SlackApi.invite_user(email) do
-          %{body: res} ->
+          {:ok, %{body: res} } ->
             assert res["ok"] == true
           {:error, err} -> flunk err
         end
@@ -56,8 +55,9 @@ defmodule SlackInviter.SlackApiTest do
     test "When a user is already in chat, fail with error" do
         email = "member@syracuse.io"
 
+
         case SlackApi.invite_user(email) do
-          %{body: res} ->
+          {:ok, %{body: res} } ->
             assert res["ok"] == false
             assert res["error"] == "already_in_team"
           {:error, err} -> flunk err
