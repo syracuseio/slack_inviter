@@ -12,6 +12,8 @@ defmodule SlackInviter.Application do
       supervisor(SlackInviterWeb.Endpoint, []),
       # Start your own worker by calling: SlackInviter.Worker.start_link(arg1, arg2, arg3)
       # worker(SlackInviter.Worker, [arg1, arg2, arg3]),
+      {SlackInviter.ConnectedUsers, []},
+      {SlackInviter.UserPresenceAgent, []},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
