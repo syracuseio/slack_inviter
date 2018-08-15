@@ -15,5 +15,9 @@ defmodule SlackInviter.SlackApi do
   def invite_user(email) do
     post("/users.admin.invite", %{email: email, resend: true, token: @slack_api_token})
   end
+
+  def rtm_connect do
+    get("/rtm.connect", query: [token: @slack_api_token])
+  end
 end
 

@@ -3,6 +3,7 @@ defmodule SlackInviterWeb.UserSocket do
 
   ## Channels
   # channel "room:*", SlackInviterWeb.RoomChannel
+  channel "user_presence:lobby", SlackInviterWeb.UserPresenceChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

@@ -40,6 +40,7 @@ defmodule SlackInviter.Mixfile do
       {:cowboy, "~> 1.0"},
       {:tesla, "~> 1.0.0"},
       {:jason, "~> 1.0"},
+      {:websockex, "~> 0.4.0"},
     ]
   end
 
