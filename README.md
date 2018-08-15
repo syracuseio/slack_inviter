@@ -6,7 +6,7 @@ A small phoenix app that uses the Slack API to get display user counts, and invi
 
 To run locally:
 * `cp .env.example .env`
-* update .env with your slack api token
+* update .env with your slack [legacy api token](https://api.slack.com/custom-integrations/legacy-tokens)
 * `mix deps.get`
 * `cd assets && npm install && cd ..`
 * `source .env`
