@@ -18,9 +18,7 @@ defmodule SlackInviter.ConnectedUsers do
   def handle_frame({_type, msg}, _state) do
     case Poison.decode(msg) do
       {:ok, state} ->
-        if state["type"] == "presence_change" do
-          aggregate_presence(state)
-        end
+        aggregate_presence(state)
         {:ok, state}
       {:error, err} -> {:error, err}
     end
