@@ -3,6 +3,9 @@
 body {
     font-size: 20px;
 }
+.container {
+  max-width: 700px;
+}
 
 .navbar-custom {
     background-color: #1B1B1B;
@@ -13,4 +16,22 @@ body {
     color: #F0F0F0;
 }
 
+.logo-container {
+  position: absolute;
+  left: 50%;
+  width: 80px;
+  margin-top: -40px;
+}
+
+.logo {
+  opacity: 1;
+  position: absolute;
+  margin-left: -40%;
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  margin-bottom: 1em;
+  background-image: url("/images/logo.png");
+  background-size: 80px 80px;
+}
 

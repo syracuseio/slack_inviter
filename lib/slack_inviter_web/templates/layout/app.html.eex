@@ -8,7 +8,6 @@
     <meta name="author" content="">
 
     <title>Syracuse.io Slack!</title>
-    <link rel="stylesheet" href="https://syracuse.io/css/main.css">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -27,14 +26,12 @@
 
         <div class="collapse navbar-collapse" id="main-navbar"> </div>
 
-        <div class="avatar-container">
-          <div class="avatar-img-border">
+        <div class="logo-container">
 
-              <a title="Syracuse.io" href="https://syracuse.io/">
-                <img class="avatar-img" src="https://syracuse.io/img/logo.png" alt="Syracuse.io">
-              </a>
+            <a title="Syracuse.io" href="https://syracuse.io/">
+              <img class="logo" src="images/logo.png" alt="Syracuse.io">
+            </a>
 
-          </div>
         </div>
       </div>
     </nav>
