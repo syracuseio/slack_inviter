@@ -9,4 +9,6 @@ config :slack_inviter, SlackInviterWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-config :tesla, SlackInviter.SlackApi, adapter: Tesla.Mock
+config :slack_inviter,
+  slack_api_base_url: "http://localhost:8081",
+  slack_api_token: "testt0ken"
