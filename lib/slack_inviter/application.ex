@@ -7,12 +7,15 @@ defmodule SlackInviter.Application do
     import Supervisor.Spec
 
     # Define workers and child supervisors to be supervised
-    children = [
-      # Start the endpoint when the application starts
-      supervisor(SlackInviterWeb.Endpoint, []),
-      # Start your own worker by calling: SlackInviter.Worker.start_link(arg1, arg2, arg3)
-      # worker(SlackInviter.Worker, [arg1, arg2, arg3]),
-    ]
+    children = case Mix.env do
+      :test -> [
+        supervisor(SlackInviterWeb.Endpoint, []),
+        {Plug.Cowboy, scheme: :http, plug: SlackClient.MockServer, options: [port: 8081]}
+      ]
+      _ -> [
+        supervisor(SlackInviterWeb.Endpoint, []),
+      ]
+    end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
