@@ -14,7 +14,6 @@ defmodule SlackInviter.SlackApiTest do
     end
   end
 
-
   describe "SlackApi.invite_user" do
     test "When a user is new, invite them to slack" do
         email = "newbie@syracuse.io"
@@ -35,6 +34,21 @@ defmodule SlackInviter.SlackApiTest do
             assert res["error"] == "already_in_team"
           {:error, err} -> flunk err
       end
+    end
+  end
+
+  describe "SlackApi.notify_invited" do
+    test "Alert slack channel" do
+        email = "newbie@syracuse.io"
+
+        case SlackApi.notify_invited(email) do
+          {:ok, %{body: res} } ->
+            assert res["ok"] == true
+            assert res["message"]["text"] == "Invited #{email}"
+            assert res["message"]["username"] == "InviteBot"
+            assert res["message"]["icons"]["emoji"] == ":chart_with_upwards_trend:"
+          {:error, err} -> flunk err
+        end
     end
   end
 end
