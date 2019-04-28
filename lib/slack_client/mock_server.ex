@@ -35,6 +35,23 @@ defmodule SlackClient.MockServer do
     ]})
   end
 
+  post "chat.postMessage" do
+    success(conn, %{ok: true,
+      channel: "SLACK_ID_FOR_CHANNEL",
+      message: %{
+        type: "message",
+        subtype: "bot_message",
+        text: conn.params["text"],
+        username: conn.params["username"],
+        icons: %{
+            emoji: conn.params["icon_emoji"],
+            image_64: "https:\/\/a.slack-edge.com\/emoji.png"
+        },
+        bot_id: "R2D2"
+    }})
+
+  end
+
   # A catchall route, 'match' will match no matter the request method,
   # so a response is always returned, even if there is no route to match.
   match _ do

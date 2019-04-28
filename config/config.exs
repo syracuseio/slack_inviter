@@ -15,7 +15,8 @@ config :slack_inviter, SlackInviterWeb.Endpoint,
 
 config :slack_inviter,
   slack_api_base_url: System.get_env("SLACK_API_BASE") || "https://slack.com/api",
-  slack_api_token: System.get_env("SLACK_API_TOKEN")
+  slack_api_token: System.get_env("SLACK_API_TOKEN"),
+  slack_notify_channel: System.get_env("SLACK_NOTIFY_CHANNEL")
 
 # Configures Elixir's Logger
 config :logger, :console,
