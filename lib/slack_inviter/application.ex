@@ -11,6 +11,7 @@ defmodule SlackInviter.Application do
       :test -> [
         supervisor(SlackInviterWeb.Endpoint, []),
         {Plug.Cowboy, scheme: :http, plug: MockServers.FakeSlack, options: [port: 18081]},
+        {Plug.Cowboy, scheme: :http, plug: MockServers.FakeClearbit, options: [port: 18082]},
       ]
       _ -> [
         supervisor(SlackInviterWeb.Endpoint, []),
