@@ -42,11 +42,7 @@ defmodule SlackInviter.SlackApiTest do
         email = "newbie@syracuse.io"
 
         case SlackApi.notify_invited(email) do
-          {:ok, %{body: res} } ->
-            assert res["ok"] == true
-            assert res["message"]["text"] == "Invited #{email}"
-            assert res["message"]["username"] == "InviteBot"
-            assert res["message"]["icons"]["emoji"] == ":chart_with_upwards_trend:"
+          {:ok, %{body: res} } -> assert res["ok"] == true
           {:error, err} -> flunk err
         end
     end
