@@ -10,7 +10,9 @@ defmodule SlackInviter.Users do
   def parse_invite(email, response) do
     case response do
       %{"ok" => true} ->
-        notify_slack(email)
+        # NotifySlack gets tasked
+        Task.async( fn -> Notifer.notify_slack(email) end)
+
         {:ok, "success"}
       %{"ok" => false} ->
         Logger.info "Fail " <> email <> " : " <> response["error"]
@@ -42,21 +44,6 @@ defmodule SlackInviter.Users do
         {:ok, results}
       %{"ok" => false} ->
         Logger.info "Fail "<> response["error"]
-        {:error, response["error"]}
-    end
-  end
-
-  def notify_slack(email) do
-    {:ok, %{body: response}} = SlackApi.notify_invited(email)
-    parse_notify_slack email, response
-  end
-
-  def parse_notify_slack(email, response) do
-    case response do
-      %{"ok" => true} ->
-        {:ok, "success"}
-      %{"ok" => false} ->
-        Logger.info "Could not send notification to slack: " <> email <> " : " <> response["error"]
         {:error, response["error"]}
     end
   end

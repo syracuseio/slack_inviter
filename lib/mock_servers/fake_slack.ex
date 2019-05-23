@@ -1,7 +1,7 @@
-defmodule SlackClient.MockServer do
+defmodule MockServers.FakeSlack do
   use Plug.Router
-
   use Plug.Debugger
+
   require Logger
   plug Plug.Logger, log: :debug
 

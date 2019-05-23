@@ -10,5 +10,6 @@ config :slack_inviter, SlackInviterWeb.Endpoint,
 config :logger, level: :warn
 
 config :slack_inviter,
-  slack_api_base_url: "http://localhost:8081",
-  slack_api_token: "testt0ken"
+  slack_api_base_url: "http://localhost:18081",
+  slack_api_token: "testt0ken",
+  clearbit_api_base_url: "http://localhost:18082"

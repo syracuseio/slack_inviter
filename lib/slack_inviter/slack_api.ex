@@ -17,12 +17,13 @@ defmodule SlackInviter.SlackApi do
     post("/users.admin.invite", %{email: email, resend: true, token: @slack_api_token})
   end
 
-  def notify_invited(email) do
+  def notify_invited(message, blocks \\ "[]") do
     post("/chat.postMessage", %{channel: @slack_notify_channel,
-      text: "Invited #{email}",
+      text: message,
       as_user: false,
       username: "InviteBot",
       icon_emoji: ":chart_with_upwards_trend:",
+      blocks: blocks,
       token: @slack_api_token})
   end
 end
