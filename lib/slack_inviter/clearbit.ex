@@ -5,23 +5,25 @@ defmodule SlackInviter.Clearbit do
   defstruct [:name, :bio, :avatar, :title, :email, :employer, :twitter_handle, :twitter_followers, :location]
 
   def lookup(email) do
-    struct = email
+    email
       |> get_person_data
       |> build_person
   end
 
-  defp get_person_data(email) do
+  def get_person_data(email) do
     {:ok, %{body: response}} = ClearbitApi.lookup(email)
     parse_clearbit_lookup(email, response)
   end
   defp parse_clearbit_lookup(email, %{"error" => %{"type" => "queued"}}) do
     Logger.error "Unknown email, retrying in 5sec... " <> email
-    # nstart a new task to notify slack in 5s
+    # this shouldn't happen do the sync'd lookup call
+    {:error, :queued_email}
   end
   defp parse_clearbit_lookup(email, %{"error" => %{"message" => message}}) do
     Logger.error "Unable to lookup " <> email <> " : " <> message
+    {:error, :unknown_person}
   end
-  defp parse_clearbit_lookup(email, response), do: response
+  defp parse_clearbit_lookup(_email, response), do: response
 
   defp build_person({:error, %{code: :queued}}) do
     # want it to retry this whole thing if queued

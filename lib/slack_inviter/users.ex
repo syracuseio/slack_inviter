@@ -1,6 +1,7 @@
 defmodule SlackInviter.Users do
   require Logger
   alias SlackInviter.SlackApi
+  alias SlackInviter.Notifier
 
   def invite(email) do
     {:ok, %{body: response}} = SlackApi.invite_user(email)
@@ -11,7 +12,7 @@ defmodule SlackInviter.Users do
     case response do
       %{"ok" => true} ->
         # NotifySlack gets tasked
-        Task.async( fn -> Notifer.notify_slack(email) end)
+        Task.async( fn -> Notifier.notify_slack(email) end)
 
         {:ok, "success"}
       %{"ok" => false} ->
