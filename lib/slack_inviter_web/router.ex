@@ -19,7 +19,7 @@ defmodule SlackInviterWeb.Router do
     get "/", PageController, :index
 
     scope "/invite" do
-      pipe_through :browser
+      #pipe_through :browser
 
       get "/", InviteController, :index
       post "/", InviteController, :create
