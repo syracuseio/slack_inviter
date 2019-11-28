@@ -35,20 +35,15 @@ defmodule SlackInviter.Users do
   def parse_list(response) do
     case response do
       %{"ok" => true} ->
-        partitioned = response
-                      |> Map.get("members")
-                      |> Enum.group_by(fn(member) ->
-                        member["presence"]
-                      end)
-        results = %{ active: active_user_count(partitioned),
-                     away:   Enum.count(partitioned["away"]) }
+        count = response
+                  |> Map.get("members")
+                  |> Enum.reject(fn member -> member["deleted"] == true end)
+                  |> Enum.count
+        results = %{ active: count }
         {:ok, results}
       %{"ok" => false} ->
         Logger.info "Fail "<> response["error"]
         {:error, response["error"]}
     end
   end
-
-  defp active_user_count(%{"active" => active}), do: Enum.count(active)
-  defp active_user_count(_), do: 0
 end
