@@ -3,29 +3,15 @@ defmodule SlackInviter.UsersTest do
 
   alias SlackInviter.Users
 
-  describe "Users.list" do
-    test "parses users into active and away" do
-      response = %{"ok" => true, "members" => [
-            %{ "real_name" => "Aleksandra", "presence" => "active"},
-            %{ "real_name" => "Aleksandra", "presence" => "away"},
-          ]}
-      case Users.parse_list(response) do
-        {:ok, res} ->
-          assert res == %{active: 1, away: 1}
-        {:error, err} -> flunk err
-      end
-    end
-  end
-
-  describe "when there are note active users" do
+  describe "when there are 2 slack users" do
     test "it returns 0 active users" do
       response = %{"ok" => true, "members" => [
-            %{ "real_name" => "Aleksandra", "presence" => "away"},
-            %{ "real_name" => "Aleksandra", "presence" => "away"},
+            %{ "real_name" => "Aleksandra" },
+            %{ "real_name" => "James"},
           ]}
       case Users.parse_list(response) do
         {:ok, res} ->
-          assert res == %{active: 0, away: 2}
+          assert res == %{active: 2}
         {:error, err} -> flunk err
       end
     end

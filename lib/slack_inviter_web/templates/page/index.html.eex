@@ -4,8 +4,7 @@
 <hr>
 
 <p>
-Come join the <strong><%= active_member_count(@members) %> members currently online</strong>,
-and <strong><%= total_member_count(@members) %> total members</strong>.
+Come join <%= @members[:active] %> Syracuse developers
 </p>
 
 <%= form_for @conn,  invite_path(@conn, :create), [as: :register, method: :post], fn f -> %>
